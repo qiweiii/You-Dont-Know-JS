@@ -1,23 +1,23 @@
-# You Don't Know JS Yet: Get Started - 2nd Edition
-# Foreword
+# 你不知道的 JavaScript：入门 —— 第 2 版
+# 序
 
-The first time I saw a tweet advertising the crowdfunding campaign for the original book series *You Don't Know JS*, I thought to myself that whoever the hell this Kyle Simpson is can get bent. Of course I know JavaScript! At the time I had been working in JavaScript for many years with some of tech's biggest names, so I felt justified in looking down my nose at this sweeping claim.
+我第一次看到 *《你不知道的 JavaScript》*（英文书名的直译为：”你还不懂 JS“）系列丛书的众筹活动的推特广告时，我就想，不管这个 Kyle Simpson 是谁，都能被反驳。我当然懂 JavaScript！当时我已经和一些科技界的大咖一起从事 JavaScript 工作多年，所以我觉得自己有理由对这种一刀切的说法嗤之以鼻。
 
-Once the funding for the book completed, I observed that a lot of people were really excited to read this book series and I decided to go ahead and give it a shot—you know, just to show everyone that I *do know* JavaScript. Once I dug in and poured over the texts, I experienced a profound mix of learning, surprise, and even a little anger. Kyle has a knack for saying something that challenges my world view and making me think about it until I realize what he said was actually true (I'll never admit this to him though!).
+当筹资工作完成后，我观察到很多人对阅读这个系列感到非常兴奋，于是我决定去试一试 —— 你懂的，只是为了向大家展示我*确实懂* JavaScript。当我翻阅这些文字并深入研究，在学习的同时也经历了惊讶甚至是一点点愤怒。Kyle 有一种本领，他能说出一些挑战我的世界观的东西，让我思考，直到我意识到他说的其实是对的（不过我永远不会向他承认这一点！）。
 
-So it turned out I didn't know JavaScript. I didn't know why I had adopted certain patterns; I didn't know why JavaScript behaves the way it does in certain situations, and I didn't know much of the nuance of the languages that I assumed I did. Many were things I didn't know I didn't know, and I was worse off as a developer for it.
+原来我不懂 JavaScript。我不知道为什么我采用了某些模式；我不知道为什么 JavaScript 在某些情况下会有这样的行为，我也不知道很多我以为自己知道的语言中的细微差别。很多都是我不知道我不知道的事情，而我作为一个开发者，这就更糟糕了。
 
-This is what this book series is great for. It's not just for someone picking up the language for the first time (though it's for them, too); it's for all software craftspeople who want to master their tools, who want to understand the ins and outs of their trade, and who want to select the proper methods for solving problems.
+这就是这个系列丛书的好处。它不仅仅是为第一次学习这门语言的人准备的（虽然也适合他们）；它适合所有想掌握这些工具、想了解来龙去脉、想选择合适的方法解决问题的软件匠人。
 
-The thing I appreciate about Kyle and his work is that he is delightfully uninfluenced by the zeitgeist of the programming world around him. That isn't to say he isn't aware of what's happening in the community but rather that it doesn't sway his pursuit of the best answers to the correct questions. This often has put him at odds with the latest "best practices," but in reality this is exactly what you need: a perspective removed from temporal influence and simply speaking to the underlying truth. That's why this series is so good. The first edition of *You Don't Know JS* is still accurate, years later! Not many things stand this test of time given the shifting sands of the JavaScript landscape.
+我很欣赏 Kyle 和他的工作的一点是，他令人欣喜地没有受到周围编程世界的时代潮流的影响。这并不是说他不知道社区里发生了什么，而是说这并不影响他对正确问题的最佳答案的追求。这常常让他与最新的 “最佳实践” 格格不入，但实际上这正是你所需要的：一个脱离了世俗影响的视角，简单地说出根本的真相。这也是这个系列为什么这么好的原因。第一版的 *《你不知道的 JavaScript》* 出版多年后，依然准确无误！在 JavaScript 领域风云变幻的沙场上，经得起这种时间考验的东西并不多。
 
-Let's talk a moment about this first book itself, *Get Started*. You may be tempted to skip it as you may think that you already have "gotten started," but it's worth reading this one! You'd be surprised how much depth, nuance, and oddity there is in the underlying building blocks of JavaScript, and it's quite essential for you to grapple with these underpinnings before venturing forward into the constructs of the language. It's exactly the sort of foundation you need, to really know JavaScript.
+让我们来谈一谈这第一本书本身，*《入门》*。你可能会想跳过它，因为你可能认为你已经 “入门” 了，但这本书值得一读！你会惊讶于 JavaScript 的底层构件的深度、有多少细微差别和奇特之处，在冒险前进到该语言的构造之前，抓好这些底层是相当必要的。这正是你所需要的，真正了解 JavaScript 的基础。
 
-So, do your future self a favor and dig into this book and unlock the knowledge within. These solid foundations will serve you better than any framework ever will; those come and go but we'll still be writing JavaScript itself for decades to come. Keep an open mind and challenge your preconceived notions.
+所以，帮你未来的自己一个忙，深入这本书，解锁里面的知识。这些扎实的基础会比任何框架都更能帮助到你，那些框架来来去去，但在未来的几十年里，我们仍然会编写 JavaScript 本身。保持开放的心态，挑战你先入为主的观念。
 
-Because, as I found out myself, you probably don't know JavaScript (yet).
+因为，正如我自己也发现的那样，你（目前）可能并不了解 JavaScript。
 
 Brian Holt<br>
-Senior Program Manager<br>
+资深项目经理<br>
 Visual Studio Code and Node.js on Azure<br>
 Microsoft

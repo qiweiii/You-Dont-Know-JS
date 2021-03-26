@@ -1,45 +1,45 @@
-# You Don't Know JS Yet: Get Started - 2nd Edition
+# 你不知道的 JavaScript：入门 —— 第 2 版
 
-## Table of Contents
+## 目录
 
-* Foreword
-* Preface
-* Chapter 1: What Is JavaScript?
-    * About This Book
-    * What's With That Name?
-    * Language Specification
-    * Many Faces
-    * Backwards & Forwards
-    * What's in an Interpretation?
-    * Strictly Speaking
-    * Defined
-* Chapter 2: Surveying JS
-    * Each File is a Program
-    * Values
-    * Declaring and Using Variables
-    * Functions
-    * Comparisons
-    * How We Organize in JS
-    * The Rabbit Hole Deepens
-* Chapter 3: Digging To The Roots Of JS
-    * Iteration
-    * Closure
-    * `this` Keyword
-    * Prototypes
-    * Asking "Why?"
-* Chapter 4: The Bigger Picture
-    * Pillar 1: Scope and Closure
-    * Pillar 2: Prototypes
-    * Pillar 3: Types and Coercion
-    * With the Grain
-    * In Order
-* Appendix A: Exploring Further
-    * Values vs. References
-    * So Many Function Forms
-    * Coercive Conditional Comparison
-    * Prototypal "Classes"
-* Appendix B: Practice, Practice, Practice!
-    * Practicing Comparisons
-    * Practicing Closure
-    * Practicing Prototypes
-    * Suggested Solutions
+* 序
+* 前言
+* 第 1 章：什么是 JavaScript？
+    * 关于本书
+    * 这个名字是怎么回事？
+    * 语言规范
+    * 多面性
+    * 向后和向前
+    * 什么是解释？
+    * 严格地说
+    * 定义
+* 第 2 章：调查 JS
+    * 每个文件都是一个程序
+    * 值
+    * 声明和使用变量
+    * 函数
+    * 比较
+    * 我们如何在 JS 中组织
+    * “兔洞” 越陷越深
+* 第 3 章：深入 JS 的根基
+    * 迭代
+    * 闭包
+    * `this` 关键字
+    * 原型
+    * 问 “为什么？”
+* 第 4 章：大局观
+    * 支柱 1：作用域和闭包
+    * 支柱 2：原型
+    * 支柱 3：类型和强制
+    * 符合规律
+    * 顺序
+* 附录 A：进一步探讨
+    * 值与引用
+    * 这么多的函数形式
+    * 强制性条件比较
+    * 原型 “类”
+* 附录 B：练习、练习、练习！
+    * 练习比较
+    * 练习闭包
+    * 练习原型
+    * 参考答案

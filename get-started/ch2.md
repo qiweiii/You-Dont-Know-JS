@@ -1,57 +1,57 @@
-# You Don't Know JS Yet: Get Started - 2nd Edition
-# Chapter 2: Surveying JS
+# 你不知道的 JavaScript：入门 —— 第 2 版
+# 第 2 章：调查 JS
 
-The best way to learn JS is to start writing JS.
+学习 JS 的最好方法是开始编写 JS。
 
-To do that, you need to know how the language works, and that's what we'll focus on here. Even if you've programmed in other languages before, take your time getting comfortable with JS, and make sure to practice each piece.
+要做到这一点，你需要知道这门语言是如何工作的，这就是我们在这里要关注的。即使你以前用过其他语言编程，也需要慢慢适应 JS，并确保练习每一块知识点。
 
-This chapter is not an exhaustive reference on every bit of syntax of the JS language. It's also not intended to be a complete "intro to JS" primer.
+本章并不是 JS 所有语法的详细参考，它也不打算成为一个完整的 “JS 入门” 书籍。
 
-Instead, we're just going to survey some of the major topic areas of the language. Our goal is to get a better *feel* for it, so that we can move forward writing our own programs with more confidence. We'll revisit many of these topics in successively more detail as you go through the rest of this book, and the rest of the series.
+相反，我们只是调查该语言的一些主要话题。我们的目标是更好地*感受*它，这样我们就可以更有信心地编写程序。当你阅读本书的其余部分，以及系列的其余部分时，我们将陆续更详细地重温这些话题中的许多内容。
 
-Please don't expect this chapter to be a quick read. It's long and there's plenty of detail to chew on. Take your time.
+请不要期望这一章可以快速阅读。它很长，有很多细节需要咀嚼。慢慢来吧。
 
-| TIP: |
+| 提示： |
 | :--- |
-| If you're still getting familiar with JS, I suggest you reserve plenty of extra time to work through this chapter. Take each section and ponder and explore the topic for awhile. Look through existing JS programs and compare what you see in them to the code and explanations (and opinions!) presented here. You will get a lot more out of the rest of the book and series with a solid foundation of JS's *nature*. |
+| 如果你还在熟悉 JS，我建议你预留充足的时间来完成本章的学习，把每一节的内容都思考和探索一段时间。查看现有的 JS 程序，并将其中的内容与这里介绍的代码和解释（以及意见！）进行比较。有了对 JS *本质*的坚实基础，你会从本书和系列的其他部分得到更多的东西。 |
 
-## Each File is a Program
+## 每个文件都是一个程序
 
-Almost every website (web application) you use is comprised of many different JS files (typically with the .js file extension). It's tempting to think of the whole thing (the application) as one program. But JS sees it differently.
+几乎你使用的每一个网站（Web 应用程序）都是由许多不同的 JS 文件（通常以 .js 文件扩展名）组成的。把整个东西（应用）当成一个程序是很诱人的。但 JS 并不这样认为。
 
-In JS, each standalone file is its own separate program.
+在 JS 中，每个单独的文件都是独立的程序。
 
-The reason this matters is primarily around error handling. Since JS treats files as programs, one file may fail (during parse/compile or execution) and that will not necessarily prevent the next file from being processed. Obviously, if your application depends on five .js files, and one of them fails, the overall application will probably only partially operate, at best. It's important to ensure that each file works properly, and that to whatever extent possible, they handle failure in other files as gracefully as possible.
+这一点很重要的原因是它与错误处理相关。由于 JS 将文件视为程序，一个文件可能会出故障（在分析/编译或执行过程中），但这不一定会阻止下一个文件的处理。显然，如果你的应用程序依赖于五个 .js 文件，而其中一个文件失败，那么整个应用程序可能最多只能部分运行。重要的是要确保每个文件都能正常工作，同时能尽可能优雅地处理其他文件的故障。
 
-It may surprise you to consider separate .js files as separate JS programs. From the perspective of your usage of an application, it sure seems like one big program. That's because the execution of the application allows these individual *programs* to cooperate and act as one program.
+你可能会对将单独的 .js 文件视为独立的 JS 程序感到惊讶。从你使用应用程序的角度来看，它肯定像一个大程序。这是因为应用程序的执行允许这些单独的*程序*合作，并作为一个来程序运行。
 
-| NOTE: |
+| 注意： |
 | :--- |
-| Many projects use build process tools that end up combining separate files from the project into a single file to be delivered to a web page. When this happens, JS treats this single combined file as the entire program. |
+| 许多项目使用构建工具，最终将项目中的独立文件合并成一个文件，交付给网页。当这种情况发生时，JS 会将这个合并后的文件作为一整个程序来处理。 |
 
-The only way multiple standalone .js files act as a single program is by sharing their state (and access to their public functionality) via the "global scope." They mix together in this global scope namespace, so at runtime they act as as whole.
+将多个独立的 .js 文件作为一个程序的唯一方式是通过 “全局作用域” 共享它们的状态（以及对它们的公共功能的访问）。它们在这个全局作用域的命名空间中混合在一起，所以在运行时它们会作为一个整体。
 
-Since ES6, JS has also supported a module format in addition to the typical standalone JS program format. Modules are also file-based. If a file is loaded via module-loading mechanism such as an `import` statement or a `<script type=module>` tag, all its code is treated as a single module.
+从 ES6 开始，JS 除了典型的独立 JS 程序格式外，还支持一种模块格式。模块也是基于文件的。如果一个文件通过模块加载机制（如 `import` 语句或 `<script type=module>` 标签）加载，它的所有代码都会被视为一个单一的模块。
 
-Though you wouldn't typically think about a module—a collection of state and publicly exposed methods to operate on that state—as a standalone program, JS does in fact still treat each module separately. Similar to how "global scope" allows standalone files to mix together at runtime, importing a module into another allows runtime interoperation between them.
+虽然你通常不会把一个模块 —— 一个有状态并把对该状态进行操作的方法公开暴露的集合 —— 看作是一个独立的程序，但事实上 JS 仍然会把每个模块单独处理。就像 “全局作用域” 允许独立文件在运行时混在一起一样，将一个模块导入到另一个模块中也允许它们之间的运行时相互协作。
 
-Regardless of which code organization pattern (and loading mechanism) is used for a file (standalone or module), you should still think of each file as its own (mini) program, which may then cooperate with other (mini) programs to perform the functions of your overall application.
+无论一个文件（独立或模块）使用哪种代码组织模式（和加载机制），你仍然应该把每个文件看作是独立的（迷你）程序，然后它可以与其他（迷你）程序合作来执行你的整体应用程序的功能。
 
-## Values
+## 值
 
-The most fundamental unit of information in a program is a value. Values are data. They're how the program maintains state. Values come in two forms in JS: **primitive** and **object**.
+程序中最基本的信息单元是值。值就是数据。它们是程序维持状态的方式。在 JS 中，值有两种形式：**原始**和**对象**。
 
-Values are embedded in programs using *literals*:
+在程序中，值是用*字面量*表示的：
 
 ```js
 greeting("My name is Kyle.");
 ```
 
-In this program, the value `"My name is Kyle."` is a primitive string literal; strings are ordered collections of characters, usually used to represent words and sentences.
+在这个程序中，值 `"My name is Kyle."` 是一个原始字符串；字符串是有序的字符集合，通常用来表示单词和句子。
 
-I used the double-quote `"` character to *delimit* (surround, separate, define) the string value. But I could have used the single-quote `'` character as well. The choice of which quote character is entirely stylistic. The important thing, for the sake of code readability and maintainability, is to pick one and to use it consistently throughout the program.
+我使用双引号 `"` 字符来*定界*（包围、分离、定义）字符串值。但我也可以使用单引号 `'`  字符。选择哪个引号字符完全是风格上的问题。重要的是，为了代码的可读性和可维护性，选择一个并在整个程序中一致使用它。
 
-Another option to delimit a string literal is to use the back-tick `` ` `` character. However, this choice is not merely stylistic; there's a behavioral difference as well. Consider:
+另一个给字符串文字定界的选择是使用反单引号 `` ` `` 字符。然而，这种选择不仅仅是风格上的，还有行为上的差异。请考虑：
 
 ```js
 console.log("My name is ${ firstName }.");
@@ -64,9 +64,9 @@ console.log(`My name is ${ firstName }.`);
 // My name is Kyle.
 ```
 
-Assuming this program has already defined a variable `firstName` with the string value `"Kyle"`, the `` ` ``-delimited string then resolves the variable expression (indicated with `${ .. }`) to its current value. This is called **interpolation**.
+假设这个程序已经定义了一个变量 `firstName`，其字符串值为 `"Kyle"`，那么由 `` ` `` 定界的字符串会将变量表达式（用 `${ ... }` 表示）解析为其当前值。这就是所谓的**内插**。
 
-The back-tick `` ` ``-delimited string can be used without including interpolated expressions, but that defeats the whole purpose of that alternate string literal syntax:
+反单引号 `` ` `` 定界的字符串可以在不包含内插表达式的情况下使用，但这样做就违背了使用这种字符串语法的全部目的。
 
 ```js
 console.log(
@@ -75,9 +75,9 @@ console.log(
 // Am I confusing you by omitting interpolation?
 ```
 
-The better approach is to use `"` or `'` (again, pick one and stick to it!) for strings *unless you need* interpolation; reserve `` ` `` only for strings that will include interpolated expressions.
+更好的方法是使用 `"` 或 `'`（同样，选择一个并坚持使用！）来处理*不需要*插值的字符串；保留 `` ` `` 仅用于包含内插表达式的字符串。
 
-Other than strings, JS programs often contain other primitive literal values such as booleans and numbers:
+除了字符串之外，JS 程序还经常包含其他原始字面量值，如布尔值和数字：
 
 ```js
 while (false) {
@@ -85,24 +85,24 @@ while (false) {
 }
 ```
 
-`while` represents a loop type, a way to repeat operations *while* its condition is true.
+`while` 代表一种循环类型，是一种*当*条件为 true 时重复操作的方式。
 
-In this case, the loop will never run (and nothing will be printed), because we used the `false` boolean value as the loop conditional. `true` would have resulted in a loop that keeps going forever, so be careful!
+在这个例子中，循环永远不会运行（也不会打印任何东西），因为我们使用 `false` 布尔值作为循环条件。`true` 则会导致一个循环永远持续下去，所以要小心!
 
-The number `3.141592` is, as you may know, an approximation of mathematical PI to the first six digits. Rather than embed such a value, however, you would typically use the predefined `Math.PI` value for that purpose. Another variation on numbers is the `bigint` (big-integer) primitive type, which is used for storing arbitrarily large numbers.
+如你所知，数字 `3.141592` 是数学中 PI 的前六位数的近似值。然而，与其嵌入这样一个值，你通常会使用预先定义的 `Math.PI` 值来达到这个目的。数字的另一种是 `bigint`（大整数）原始类型，它用于存储任意大的数。
 
-Numbers are most often used in programs for counting steps, such as loop iterations, and accessing information in numeric positions (i.e., an array index). We'll cover arrays/objects in a little bit, but as an example, if there was an array called `names`, we could access the element in its second position like this:
+数字在程序中最常用于计算次数，如循环迭代，以及访问数值位置上的信息（即数组索引）。我们稍后将介绍数组/对象，但作为一个例子，如果有一个名为 `names` 的数组，我们可以这样访问它第二个位置的元素：
 
 ```js
 console.log(`My name is ${ names[1] }.`);
 // My name is Kyle.
 ```
 
-We used `1` for the element in the second position, instead of `2`, because like in most programming languages, JS array indices are 0-based (`0` is the first position).
+我们用 `1` 来表示第二个位置上的元素，而不是 `2`，因为和大多数编程语言一样，JS 数组的索引是基于 0 的（`0` 是第一个位置）。
 
-In addition to strings, numbers, and booleans, two other *primitive* values in JS programs are `null` and `undefined`. While there are differences between them (some historic and some contemporary), for the most part both values serve the purpose of indicating *emptiness* (or absence) of a value.
+除了字符串、数字和布尔值之外，JS 程序中还有两个*原始*值是 `null` 和 `undefined`。虽然它们之间存在差异（有些是历史性的，有些是当代的），但在大多数情况下，这两个值的作用都是表示一个值*为空*（或不存在）。
 
-Many developers prefer to treat them both consistently in this fashion, which is to say that the values are assumed to be indistinguishable. If care is taken, this is often possible. However, it's safest and best to use only `undefined` as the single empty value, even though `null` seems attractive in that it's shorter to type!
+许多开发者喜欢将两者一致对待，也就是说，假设这两个值是无法区分的。如果足够小心，这通常是可能的。然而，最安全和最好的做法是只使用 `undefined` 作为单一的空值，尽管 `null` 看起来很有吸引力，因为它需要打的字更短！
 
 ```js
 while (value != undefined) {
@@ -110,20 +110,20 @@ while (value != undefined) {
 }
 ```
 
-The final primitive value to be aware of is a symbol, which is a special-purpose value that behaves as a hidden unguessable value. Symbols are almost exclusively used as special keys on objects:
+最后一个需要注意的原始值是符号，它是一个特殊用途的值，表现为一个隐藏的不可猜测的值。符号几乎只作为对象上的特殊键使用：
 
 ```js
 hitchhikersGuide[ Symbol("meaning of life") ];
 // 42
 ```
 
-You won't encounter direct usage of symbols very often in typical JS programs. They're mostly used in low-level code such as in libraries and frameworks.
+在典型的 JS 程序中，你不会经常遇到直接使用符号的情况。它们大多用在底层代码中，如库和框架中。
 
-### Arrays And Objects
+### 数组和对象
 
-Besides primitives, the other value type in JS is an object value.
+除了原始值，JS 中的另一种类型的值是对象值。
 
-As mentioned earlier, arrays are a special type of object that's comprised of an ordered and numerically indexed list of data:
+如前所述，数组是一种特殊的对象，它是一个由有序的、有数字索引的数据列表组成的：
 
 ```js
 var names = [ "Frank", "Kyle", "Peter", "Susan" ];
@@ -138,13 +138,13 @@ names[1];
 // Kyle
 ```
 
-JS arrays can hold any value type, either primitive or object (including other arrays). As we'll see toward the end of Chapter 3, even functions are values that can be held in arrays or objects.
+JS 数组可以容纳任何类型的值，无论是原始值还是对象值（包括其他数组）。正如我们将在第三章的最后看到的那样，即使是函数也是可以在数组或对象中保存的值。
 
-| NOTE: |
+| 注意： |
 | :--- |
-| Functions, like arrays, are a special kind (aka, sub-type) of object. We'll cover functions in more detail in a bit. |
+| 函数和数组一样，是一种特殊的对象（也叫做子类型）。我们稍后会详细介绍函数。 |
 
-Objects are more general: an unordered, keyed collection of any various values. In other words, you access the element by a string location name (aka "key" or "property") rather than by its numeric position (as with arrays). For example:
+对象是更笼统的：一个无序的、有键的、由任何不同的值组成的集合。换句话说，你通过一个字符串位置名（也就是 ”键“ 或 ”属性“）来访问元素，而不是像数组那样通过它的数值位置来访问。比如：
 
 ```js
 var me = {
@@ -157,11 +157,11 @@ var me = {
 console.log(`My name is ${ me.first }.`);
 ```
 
-Here, `me` represents an object, and `first` represents the name of a location of information in that object (value collection). Another syntax option that accesses information in an object by its property/key uses the square-brackets `[ ]`, such as  `me["first"]`.
+在这里，`me` 代表一个对象，`first` 代表该对象（值集合）中的信息的位置名称。另一个语法选项是通过对象的属性/键访问对象中的信息，使用方括号 `[]`，如 `me["first"]`。
 
-### Value Type Determination
+### 值类型的确定
 
-For distinguishing values, the `typeof` operator tells you its built-in type, if primitive, or `"object"` otherwise:
+为了区分值，如果是原始类型，`typeof` 操作符可以告诉你它的内置类型，如果不是则为 `"object"`：
 
 ```js
 typeof 42;                  // "number"
@@ -174,39 +174,39 @@ typeof [1,2,3];             // "object"
 typeof function hello(){};  // "function"
 ```
 
-| WARNING: |
+| 警告： |
 | :--- |
-| `typeof null` unfortunately returns `"object"` instead of the expected `"null"`. Also, `typeof` returns the specific `"function"` for functions, but not the expected `"array"` for arrays. |
+| 遗憾的是，`typeof null` 返回的是 `"object"`，而不是预期的 `"null"`。另外，对于函数，`typeof` 返回特定的 `"function"`，而对于数组，则没有返回预期的 `"array"`。|
 
-Converting from one value type to another, such as from string to number, is referred to in JS as "coercion." We'll cover this in more detail later in this chapter.
+从一种值类型转换为另一种值类型，比如从字符串转换为数字，在 JS 中被称为 “强制”。我们将在本章后面详细介绍。
 
-Primitive values and object values behave differently when they're assigned or passed around. We'll cover these details in Appendix A, "Values vs References."
+原始值和对象值在被赋值或传递时的行为是不同的。我们将在附录 A “值与引用” 中介绍这些细节。
 
-## Declaring and Using Variables
+## 声明和使用变量
 
-To be explicit about something that may not have been obvious in the previous section: in JS programs, values can either appear as literal values (as many of the preceding examples illustrate), or they can be held in variables; think of variables as just containers for values.
+要明确一些在上一节中可能并不明显的东西：在 JS 程序中，值可以以字面量的形式出现（就像前面的许多例子所说明的那样），也可以将它们保存在变量中；将变量看作是值的容器。
 
-Variables have to be declared (created) to be used. There are various syntax forms that declare variables (aka, "identifiers"), and each form has different implied behaviors.
+变量必须经过声明（创建）才能使用。有各种不同的语法形式来声明变量（也就是 “标识符”），每种形式都有不同的隐含行为。
 
-For example, consider the `var` statement:
+例如，考虑 `var` 语句：
 
 ```js
 var myName = "Kyle";
 var age;
 ```
 
-The `var` keyword declares a variable to be used in that part of the program, and optionally allows an initial assignment of a value.
+`var` 关键字声明一个要在那部分程序中使用的变量，并可选择赋初值。
 
-Another similar keyword is `let`:
+另一个类似的关键字是 `let`：
 
 ```js
 let myName = "Kyle";
 let age;
 ```
 
-The `let` keyword has some differences to `var`, with the most obvious being that `let` allows a more limited access to the variable than `var`. This is called "block scoping" as opposed to regular or function scoping.
+`let` 关键字与 `var` 有一些不同，最明显的是 `let` 对变量允许的访问比 `var` 更有限。这被称为 “块作用域”，而不是常规或函数作用域。
 
-Consider:
+考虑：
 
 ```js
 var adult = true;
@@ -224,19 +224,19 @@ console.log(age);
 // Error!
 ```
 
-The attempt to access `age` outside of the `if` statement results in an error, because `age` was block-scoped to the `if`, whereas `myName` was not.
+试图在 `if` 语句之外访问 `age` 会导致错误，因为 `age` 是在 `if` 的块作用域内，而 `myName` 不是。
 
-Block-scoping is very useful for limiting how widespread variable declarations are in our programs, which helps prevent accidental overlap of their names.
+块作用域对于限制变量声明在程序中的覆盖范围非常有用，这有助于防止它们的名称意外重叠。
 
-But `var` is still useful in that it communicates "this variable will be seen by a wider scope (of the whole function)". Both declaration forms can be appropriate in any given part of a program, depending on the circumstances.
+但 `var` 仍然是有用的，因为它传达了 “这个变量将被更广泛的范围（整个函数）看到”。这两种声明形式都可以适合于程序的任何一个特定部分，视情况而定。
 
-| NOTE: |
+| 注意： |
 | :--- |
-| It's very common to suggest that `var` should be avoided in favor of `let` (or `const`!), generally because of perceived confusion over how the scoping behavior of `var` has worked since the beginning of JS. I believe this to be overly restrictive advice and ultimately unhelpful. It's assuming you are unable to learn and use a feature properly in combination with other features. I believe you *can* and *should* learn any features available, and use them where appropriate! |
+| 通常建议避免使用 `var`，而使用 `let`（或 `const`！），这通常是由于人们对 `var` 的作用域行为的工作方式感到困惑。我认为这是过于限制性的建议，最终是无益的。这是在假设你无法正确地学习和使用一个功能与其他功能的结合。我相信你*可以*而且*应该*学习任何可用的功能，并在适当的地方使用它们！|
 
-A third declaration form is `const`. It's like `let` but has an additional limitation that it must be given a value at the moment it's declared, and cannot be re-assigned a different value later.
+第三种声明形式是 `const`。它和 `let` 一样，但有一个额外的限制，即在声明时必须给它一个值，而且以后不能重新给它赋一个不同的值。
 
-Consider:
+考虑：
 
 ```js
 const myBirthday = true;
@@ -248,9 +248,9 @@ if (myBirthday) {
 }
 ```
 
-The `myBirthday` constant is not allowed to be re-assigned.
+`myBirthday` 常量不允许被重新赋值。
 
-`const` declared variables are not "unchangeable", they just cannot be re-assigned. It's ill-advised to use `const` with object values, because those values can still be changed even though the variable can't be re-assigned. This leads to potential confusion down the line, so I think it's wise to avoid situations like:
+`const` 声明的变量并非 “不可改变”，只是不能被重新赋值。给对象值使用 `const` 是不明智的，因为即使变量不能被重新赋值，这些值仍然可以被改变。这将导致潜在的混乱，所以我认为避免这样的情况是明智的：
 
 ```js
 const actors = [
@@ -261,13 +261,13 @@ actors[2] = "Tom Cruise";   // OK :(
 actors = [];                // Error!
 ```
 
-The best semantic use of a `const` is when you have a simple primitive value that you want to give a useful name to, such as using `myBirthday` instead of `true`. This makes programs easier to read.
+`const` 在语义上的最佳用法是当你有一个简单的原始值，你想给它起一个有用的名字，比如用`myBirthday` 而不是 `true`。这使得程序更容易阅读。
 
-| TIP: |
+| 提示： |
 | :--- |
-| If you stick to using `const` only with primitive values, you avoid any confusion of re-assignment (not allowed) vs. mutation (allowed)! That's the safest and best way to use `const`. |
+| 如果你坚持只对原始值使用 `const`，你就可以避免混淆任何重新赋值（不允许）与内在改变（允许）！这是最安全和最好的 `const` 的使用方式。 |
 
-Besides `var` / `let` / `const`, there are other syntactic forms that declare identifiers (variables) in various scopes. For example:
+除了 `var` / `let` / `const` 之外，还有其他的语法形式可以在不同的作用域内声明标识符（变量）。例如：
 
 ```js
 function hello(myName) {
@@ -278,9 +278,9 @@ hello("Kyle");
 // Hello, Kyle.
 ```
 
-The identifier `hello` is created in the outer scope, and it's also automatically associated so that it references the function. But the named parameter `myName` is created only inside the function, and thus is only accessible inside that function's scope. `hello` and `myName` generally behave as `var`-declared.
+标识符 `hello` 是在外部作用域中创建的，并且它被自动关联，以便引用函数。但参数 `myName` 只在函数内部创建，因此只能在该函数的作用域内访问。`hello` 和 `myName` 的大致行为与 `var` 声明的变量相似。
 
-Another syntax that declares a variable is a `catch` clause:
+另一种声明变量的语法是 `catch` 子句：
 
 ```js
 try {
@@ -291,15 +291,15 @@ catch (err) {
 }
 ```
 
-The `err` is a block-scoped variable that exists only inside the `catch` clause, as if it had been declared with `let`.
+`err` 是一个块作用域变量，只存在于 `catch` 子句中，就像是用 `let` 声明的一样。
 
-## Functions
+## 函数
 
-The word "function" has a variety of meanings in programming. For example, in the world of Functional Programming, "function" has a precise mathematical definition and implies a strict set of rules to abide by.
+在编程中，“函数” 一词有多种含义。例如，在函数式编程的世界里，“函数” 有一个精确的数学定义，并意味着一套严格遵守的规则。
 
-In JS, we should consider "function" to take the broader meaning of another related term: "procedure." A procedure is a collection of statements that can be invoked one or more times, may be provided some inputs, and may give back one or more outputs.
+在 JS 中，我们应当认为 “函数” 具有另一个更广泛含义的术语：“过程”。一个过程是一个可以被调用一次或多次的语句集合，可以提供一些输入，也可以回馈一个或多个输出。
 
-From the early days of JS, function definition looked like:
+从早期的 JS 来看，函数的定义是这样的：
 
 ```js
 function awesomeFunction(coolThings) {
@@ -308,9 +308,9 @@ function awesomeFunction(coolThings) {
 }
 ```
 
-This is called a function declaration because it appears as a statement by itself, not as an expression in another statement. The association between the identifier `awesomeFunction` and the function value happens during the compile phase of the code, before that code is executed.
+这被称为函数声明，因为它本身是作为一个语句出现的，而不是作为另一个语句中的表达式。标识符 `awesomeFunction` 和函数值之间的关联发生在代码的编译阶段，在代码执行之前。
 
-In contrast to a function declaration statement, a function expression can be defined and assigned like this:
+与函数声明语句不同，函数表达式可以这样定义和赋值：
 
 ```js
 // let awesomeFunction = ..
@@ -321,11 +321,11 @@ var awesomeFunction = function(coolThings) {
 };
 ```
 
-This function is an expression that is assigned to the variable `awesomeFunction`. Different from the function declaration form, a function expression is not associated with its identifier until that statement during runtime.
+这个函数是一个表达式，它被赋值给变量 `awesomeFunction`。与函数声明不同的是，函数表达式直到该语句在运行时，才会与其标识符相关联。
 
-It's extremely important to note that in JS, functions are values that can be assigned (as shown in this snippet) and passed around. In fact, JS functions are a special type of the object value type. Not all languages treat functions as values, but it's essential for a language to support the functional programming pattern, as JS does.
+极为重要的是，在 JS 中，函数是可以被赋值（如本段代码所示）和传递的值。事实上，JS 函数是对象值类型的一种特殊类型。并不是所有的语言都把函数当作值来处理，但对于一门语言来说，支持函数式编程模式是必不可少的，JS 就是这样。
 
-JS functions can receive parameter input:
+JS 函数可以接收输入参数：
 
 ```js
 function greeting(myName) {
@@ -335,9 +335,9 @@ function greeting(myName) {
 greeting("Kyle");   // Hello, Kyle!
 ```
 
-In this snippet, `myName` is called a parameter, which acts as a local variable inside the function. Functions can be defined to receive any number of parameters, from none upward, as you see fit. Each parameter is assigned the argument value that you pass in that position (`"Kyle"`, here) of the call.
+在这段代码中，`myName` 被称为参数，它在函数中作为一个局部变量。函数可以被定义接收任何数量的参数，从无到无数个，只要你认为合适。每个参数都会被赋予在你调用的那个位置（这里是 `"Kyle"`）传递进来的参数值。
 
-Functions also can return values using the `return` keyword:
+函数也可以使用 `return` 关键字返回值：
 
 ```js
 function greeting(myName) {
@@ -349,9 +349,9 @@ var msg = greeting("Kyle");
 console.log(msg);   // Hello, Kyle!
 ```
 
-You can only `return` a single value, but if you have more values to return, you can wrap them up into a single object/array.
+你只能 `return` 一个值，但如果你有更多的值要返回，你可以把它们打包成一个对象/数组。
 
-Since functions are values, they can be assigned as properties on objects:
+由于函数是值，它们可以作为对象的属性：
 
 ```js
 var whatToSay = {
@@ -370,25 +370,25 @@ whatToSay.greeting();
 // Hello!
 ```
 
-In this snippet, references to three functions (`greeting()`, `question()`, and `answer()`) are included in the object held by `whatToSay`. Each function can be called by accessing the property to retrieve the function reference value. Compare this straightforward style of defining functions on an object to the more sophisticated `class` syntax discussed later in this chapter.
+在这段代码中，三个函数（`greeting()`、`question()` 和 `answer()`）的引用被包含在 `whatToSay` 所关联的对象中。每个函数都可以通过访问属性获取函数引用值来调用。请将这种在对象上直接定义函数的风格与本章后面讨论的更复杂的 `class` 语法进行比较。
 
-There are many varied forms that `function`s take in JS. We dig into these variations in Appendix A, "So Many Function Forms."
+在 JS 中，`function` 有许多不同的形式。我们在附录 A “这么多的函数形式” 中对这些变化进行挖掘。
 
-## Comparisons
+## 比较
 
-Making decisions in programs requires comparing values to determine their identity and relationship to each other. JS has several mechanisms to enable value comparison, so let's take a closer look at them.
+在程序中做决策时，需要比较值来确定它们的身份和相互之间的关系。JS 有几种机制可以实现值的比较，我们来仔细看看。
 
-### Equal...ish
+### 相等性
 
-The most common comparison in JS programs asks the question, "Is this X value *the same as* that Y value?" What exactly does "the same as" really mean to JS, though?
+JS 程序中最常见的比较问了一个问题：“这个 X 值和那个 Y 值*一样*吗？” 不过对于 JS 来说，“一样” 到底是什么意思呢？
 
-For ergonomic and historical reasons, the meaning is more complicated than the obvious *exact identity* sort of matching. Sometimes an equality comparison intends *exact* matching, but other times the desired comparison is a bit broader, allowing *closely similar* or *interchangeable* matching. In other words, we must be aware of the nuanced differences between an **equality** comparison and an **equivalence** comparison.
+由于人机工程学和历史原因，其含义比明显的*完全相同*的那种匹配要复杂得多。有时，相等性比较的意图是*完全相同*的匹配，但另一些时候，所需的比较范围更广一些，允许*近似*或*可互换*的匹配。换句话说，我们必须意识到**相等性**比较和**等价**比较之间的细微差别。
 
-If you've spent any time working with and reading about JS, you've certainly seen the so-called "triple-equals" `===` operator, also described as the "strict equality" operator. That seems rather straightforward, right? Surely, "strict" means strict, as in narrow and *exact*.
+如果你有花时间去使用和阅读 JS，你肯定见过所谓的 “三等号” `===` 运算符，也被描述为 “严格相等” 运算符。这看起来相当简单，对吧？当然，“严格” 的意思是严格的，比如狭义的、*完全相同*的。
 
-Not *exact*ly.
+并不完全是这样的。
 
-Yes, most values participating in an `===` equality comparison will fit with that *exact same* intuition. Consider some examples:
+是的，大多数参与 `===` 相等性比较的值都会符合这种*完全相同*的直觉。考虑一些例子：
 
 ```js
 3 === 3.0;              // true
@@ -404,24 +404,24 @@ true === 1;             // false
 null === undefined;     // false
 ```
 
-| NOTE: |
+| 注意： |
 | :--- |
-| Another way `===`'s equality comparison is often described is, "checking both the value and the type". In several of the examples we've looked at so far, like `42 === "42"`, the *type* of both values (number, string, etc.) does seem to be the distinguishing factor. There's more to it than that, though. **All** value comparisons in JS consider the type of the values being compared, not *just* the `===` operator. Specifically, `===` disallows any sort of type conversion (aka, "coercion") in its comparison, where other JS comparisons *do* allow coercion. |
+| `===` 的相等性比较的另一种描述方式是 “同时检查值和类型”。在我们目前所看的几个例子中，比如 `42 === "42"`，两个值（数字、字符串等）的*类型*似乎确实是区分因素。不过还有更多的问题。JS 中**所有**的值的比较都会考虑被比较的值的类型，而不*仅仅*是 `===` 操作符。具体来说，`===` 在比较中不允许任何类型转换（也就是 “强制”），而其他 JS 比较*允许*强制。 |
 
-But the `===` operator does have some nuance to it, a fact many JS developers gloss over, to their detriment. The `===` operator is designed to *lie* in two cases of special values: `NaN` and `-0`. Consider:
+但是 `===` 操作符确实有一些细微差别，许多 JS 开发者都忽略了这个事实，这对他们是不利的。在两种特殊值的情况下，`===` 运算符被设计成会*说谎*。`NaN` 和 `-0`。考虑：
 
 ```js
 NaN === NaN;            // false
 0 === -0;               // true
 ```
 
-In the case of `NaN`, the `===` operator *lies* and says that an occurrence of `NaN` is not equal to another `NaN`. In the case of `-0` (yes, this is a real, distinct value you can use intentionally in your programs!), the `===` operator *lies* and says it's equal to the regular `0` value.
+在 `NaN` 的情况下，`===` 运算符*说谎*，说 `NaN` 的出现不等于另一个 `NaN`。在 `-0` 的情况下（是的，这是一个真实的、独特的值，你可以在你的程序中有意使用！），`===` 运算符*说谎*，说它等于常规的 `0` 值。
 
-Since the *lying* about such comparisons can be bothersome, it's best to avoid using `===` for them. For `NaN` comparisons, use the `Number.isNaN(..)` utility, which does not *lie*. For `-0` comparison, use the `Object.is(..)` utility, which also does not *lie*. `Object.is(..)` can also be used for non-*lying* `NaN` checks, if you prefer. Humorously, you could think of `Object.is(..)` as the "quadruple-equals" `====`, the really-really-strict comparison!
+因为关于这种比较的*谎言*可能会很麻烦，所以最好避免使用 `===` 对它们进行比较。对于 `NaN` 的比较，使用 `Number.isNaN(..)` 实用程序，它不会*说谎*。对于 `-0` 的比较，使用 `Object.is(..)` 实用程序，它也不会*说谎*。如果你愿意，`Object.is(..)` 也可以用于不*说谎*的 `NaN` 检查。幽默的说，你可以把 `Object.is(..)` 看成是 “四等号” `====`，真正严格的比较！
 
-There are deeper historical and technical reasons for these *lies*, but that doesn't change the fact that `===` is not actually *strictly exactly equal* comparison, in the *strictest* sense.
+这些*谎言*有更深层次的历史和技术原因，但这并不能改变 `===` 其实并不是*严格*意义上的*完全相等的*比较。
 
-The story gets even more complicated when we consider comparisons of object values (non-primitives). Consider:
+当我们考虑对象值（非原始值）的比较时，故事变得更加复杂。考虑：
 
 ```js
 [ 1, 2, 3 ] === [ 1, 2, 3 ];    // false
@@ -429,20 +429,19 @@ The story gets even more complicated when we consider comparisons of object valu
 (x => x * 2) === (x => x * 2)   // false
 ```
 
-What's going on here?
+这里发生了什么？
 
-It may seem reasonable to assume that an equality check considers the *nature* or *contents* of the value; after all, `42 === 42` considers the actual `42` value and compares it. But when it comes to objects, a content-aware comparison is generally referred to as "structural equality."
+假设相等性检查考虑的是值的*性质*或*内容*，这似乎是合理的；毕竟，`42 === 42` 考虑的是 `42` 实际的值并进行比较。但当涉及到对象时，感知内容的比较一般被称为 “结构相等性”。
 
-JS does not define `===` as *structural equality* for object values. Instead, `===` uses *identity equality* for object values.
+对于对象值，JS 并没有把 `===` 定义为*结构相等性*。相反，`===` 对对象值使用的是*标识相等性*。
 
-In JS, all object values are held by reference (see "Values vs References" in Appendix A), are assigned and passed by reference-copy, **and** to our current discussion, are compared by reference (identity) equality. Consider:
+在 JS 中，所有的对象值都是通过引用来持有的（参见附录 A 中的 “值与引用”），是通过引用拷贝来赋值和传递的，**并且**在我们现在的讨论中，也是通过引用（标识）来比较的。考虑：
 
 ```js
 var x = [ 1, 2, 3 ];
 
-// assignment is by reference-copy, so
-// y references the *same* array as x,
-// not another copy of it.
+// 赋值是通过引用的复制，所以 y 引用了与 x 
+// *相同的* 数组，而不是它的另一个拷贝。
 var y = x;
 
 y === x;              // true
@@ -450,55 +449,55 @@ y === [ 1, 2, 3 ];    // false
 x === [ 1, 2, 3 ];    // false
 ```
 
-In this snippet, `y === x` is true because both variables hold a reference to the same initial array. But the `=== [1,2,3]` comparisons both fail because `y` and `x`, respectively, are being compared to new *different* arrays `[1,2,3]`. The array structure and contents don't matter in this comparison, only the **reference identity**.
+在这段代码中，`y === x` 为 true，因为两个变量都持有对同一个初始数组的引用。但是 `=== [1,2,3]` 的比较都失败了，因为 `y` 和 `x` 分别与新的*不同的*数组 `[1,2,3]` 在比较。在这种比较中，数组结构和内容并不重要，只有**引用标识**。
 
-JS does not provide a mechanism for structural equality comparison of object values, only reference identity comparison. To do structural equality comparison, you'll need to implement the checks yourself.
+JS 不提供对象值结构相等性的比较机制，只提供引用标识比较。要进行结构相等性比较，需要自己实现检查。
 
-But beware, it's more complicated than you'll assume. For example, how might you determine if two function references are "structurally equivalent"? Even stringifying to compare their source code text wouldn't take into account things like closure. JS doesn't provide structural equality comparison because it's almost intractable to handle all the corner cases!
+但要注意，这比你想象的要复杂得多。例如，你如何确定两个函数引用是否 “结构上相等”？即使是字符串化来比较它们的源代码文本也不会考虑到闭包等问题。JS 并没有提供结构相等性比较，因为要处理所有的边角案例几乎是无法解决的！
 
-### Coercive Comparisons
+### 强制性比较
 
-Coercion means a value of one type being converted to its respective representation in another type (to whatever extent possible). As we'll discuss in Chapter 4, coercion is a core pillar of the JS language, not some optional feature that can reasonably be avoided.
+强制是指一种类型的值被转换为另一种类型的相应表示（无论在什么程度上）。正如我们将在第 4 章中讨论的那样，强制是 JS 语言的一个核心支柱，而不是一些可以合理避免的可选功能。
 
-But where coercion meets comparison operators (like equality), confusion and frustration unfortunately crop up more often than not.
+但是，当强制与比较操作符（如相等）相遇时，不幸的是，混淆和挫折经常出现。
 
-Few JS features draw more ire in the broader JS community than the `==` operator, generally referred to as the "loose equality" operator. The majority of all writing and public discourse on JS condemns this operator as poorly designed and dangerous/bug-ridden when used in JS programs. Even the creator of the language himself, Brendan Eich, has lamented how it was designed as a big mistake.
+在更广泛的 JS 社区中，没有什么 JS 特性比 `==` 运算符，即通常所说的 “不精确相等性” 运算符更引起人们的愤怒。所有关于 JS 的写作和公开言论中，大部分都谴责这个操作符设计得很差，在 JS 程序中使用时很危险/漏洞百出。就连该语言的创造者 Brendan Eich 本人也感叹它的设计是个大错误。
 
-From what I can tell, most of this frustration comes from a pretty short list of confusing corner cases, but a deeper problem is the extremely widespread misconception that it performs its comparisons without considering the types of its compared values.
+据我所知，大部分的挫折感来自于一个相当短的令人困惑的边角案例列表，但更深层次的问题是极其普遍的误解，即它在比较时没有考虑其比较值的类型。
 
-The `==` operator performs an equality comparison similarly to how the `===` performs it. In fact, both operators consider the type of the values being compared. And if the comparison is between the same value type, both `==` and `===` **do exactly the same thing, no difference whatsoever.**
+`==` 运算符执行相等性比较的方式与 `===` 执行比较的方式类似。事实上，这两个运算符都考虑了被比较的值的类型。如果比较的是相同的值类型，则 `==` 和 `===` **做的事情完全一样，没有任何区别。**
 
-If the value types being compared are different, the `==` differs from `===` in that it allows coercion before the comparison. In other words, they both want to compare values of like types, but `==` allows type conversions *first*, and once the types have been converted to be the same on both sides, then `==` does the same thing as `===`. Instead of "loose equality," the `==` operator should be described as "coercive equality."
+如果被比较的值类型不同，`==` 与 `===` 的不同之处在于，它允许在比较之前进行强制。换句话说，它们都想比较类型相同的值，但 `==` 允许*先*进行类型转换，一旦双方的类型被转换为相同，那么 `==` 就和 `===` 做同样的事情。与其说 `==` 运算符是 “不精确相等性”，不如说是 “强制相等性”。
 
-Consider:
+考虑：
 
 ```js
 42 == "42";             // true
 1 == true;              // true
 ```
 
-In both comparisons, the value types are different, so the `==` causes the non-number values (`"42"` and `true`) to be converted to numbers (`42` and `1`, respectively) before the comparisons are made.
+在这两次比较中，值的类型是不同的，所以 `==` 导致非数字值（`"42"` 和 `true`）在进行比较之前被转换为数字（分别为 `42` 和 `1`）。
 
-Just being aware of this nature of `==`—that it prefers primitive numeric comparisons—helps you avoid most of the troublesome corner cases, such as staying away from a gotchas like `"" == 0` or `0 == false`.
+只要意识到 `==` 的这个性质 —— 它更喜欢原始的数字比较 —— 就能帮助你避免大多数麻烦的边角案例，比如远离 `"" == 0` 或 `0 == false` 这样的陷阱。
 
-You may be thinking, "Oh, well, I will just always avoid any coercive equality comparison (using `===` instead) to avoid those corner cases"! Eh, sorry, that's not quite as likely as you would hope.
+你可能会想，“哦，好吧，我将一直避免任何强制的相等性比较（使用 `===` 代替）来避免这些边角案例”！诶，对不起，这并不像你希望的那样。
 
-There's a pretty good chance that you'll use relational comparison operators like `<`, `>` (and even `<=` and `>=`).
+你很有可能会使用关系比较运算符，比如 `<`、`>`（甚至 `<=` 和 `>=`）。
 
-Just like `==`, these operators will perform as if they're "strict" if the types being relationally compared already match, but they'll allow coercion first (generally, to numbers) if the types differ.
+就像 `==` 一样，如果被关系比较的类型已经相匹配，这些运算符会表现得像 “严格的” 一样，但如果类型不同，它们会允许先进行强制（一般来说，转换成数字）。
 
-Consider:
+考虑：
 
 ```js
 var arr = [ "1", "10", "100", "1000" ];
 for (let i = 0; i < arr.length && arr[i] < 500; i++) {
-    // will run 3 times
+    // 将会运行 3 次
 }
 ```
 
-The `i < arr.length` comparison is "safe" from coercion because `i` and `arr.length` are always numbers. The `arr[i] < 500` invokes coercion, though, because the `arr[i]` values are all strings. Those comparisons thus become `1 < 500`, `10 < 500`, `100 < 500`, and `1000 < 500`. Since that fourth one is false, the loop stops after its third iteration.
+`i < arr.length` 比较是 “安全的”，因为 `i` 和 `arr.length` 总是数字。但 `arr[i] < 500` 会引起强制，因为 `arr[i]` 的值都是字符串。于是这些比较就变成了 `1 < 500`，`10 < 500`，`100 < 500`，`1000 < 500`。由于第四个是 false，所以循环在第三次迭代后停止。
 
-These relational operators typically use numeric comparisons, except in the case where **both** values being compared are already strings; in this case, they use alphabetical (dictionary-like) comparison of the strings:
+这些关系运算符通常使用数字比较，除非在**两个**值都已经是字符串的情况下；在这种情况下，它们使用字符串的字母顺序（类似字典）比较：
 
 ```js
 var x = "10";
@@ -507,27 +506,27 @@ var y = "9";
 x < y;      // true, watch out!
 ```
 
-There's no way to get these relational operators to avoid coercion, other than to just never use mismatched types in the comparisons. That's perhaps admirable as a goal, but it's still pretty likely you're going to run into a case where the types *may* differ.
+除了在比较中永远不使用不匹配的类型之外，没有办法让这些关系运算符避免强制。这也许是一个值得钦佩的目标，但你还是很有可能会遇到类型*可能*不同的情况。
 
-The wiser approach is not to avoid coercive comparisons, but to embrace and learn their ins and outs.
+更明智的做法不是避免强制比较，而是接受并学习其来龙去脉。
 
-Coercive comparisons crop up in other places in JS, such as conditionals (`if`, etc.), which we'll revisit in Appendix A, "Coercive Conditional Comparison."
+强制性比较在 JS 中的其他地方也会出现，比如条件（`if` 等），我们将在附录 A “强制性条件比较” 中重新讨论。
 
-## How We Organize in JS
+## 我们如何在 JS 中组织
 
-Two major patterns for organizing code (data and behavior) are used broadly across the JS ecosystem: classes and modules. These patterns are not mutually exclusive; many programs can and do use both. Other programs will stick with just one pattern, or even neither!
+在整个 JS 生态系统中，广泛使用了两种组织代码（数据和行为）的模式：类和模块。这些模式并不是相互排斥的；许多程序可以而且确实同时使用了这两种模式。其他的程序会坚持只使用一种模式，甚至两者都不使用！
 
-In some respects, these patterns are very different. But interestingly, in other ways, they're just different sides of the same coin. Being proficient in JS requires understanding both patterns and where they are appropriate (and not!).
+在某些方面，这些模式是非常不同的。但有趣的是，在其他方面，它们只是一枚硬币的不同面。精通 JS 需要理解这两种模式，以及它们在什么地方合适（和不合适！）。
 
-### Classes
+### 类
 
-The terms "object-oriented," "class-oriented," and "classes" are all very loaded full of detail and nuance; they're not universal in definition.
+“面向对象”、“面向类” 和 “类” 这些术语背后有很多细节和细微差别的，它们的定义并不通用。
 
-We will use a common and somewhat traditional definition here, the one most likely familiar to those with backgrounds in "object-oriented" languages like C++ and Java.
+我们将在这里使用一个常见的、有点传统的定义，对于那些有 “面向对象” 语言（如 C++ 和 Java）背景的人来说，这个定义可能是最熟悉的。
 
-A class in a program is a definition of a "type" of custom data structure that includes both data and behaviors that operate on that data. Classes define how such a data structure works, but classes are not themselves concrete values. To get a concrete value that you can use in the program, a class must be *instantiated* (with the `new` keyword) one or more times.
+程序中的类是对自定义数据结构的 “类型” 的定义，它包括数据和对该数据进行操作的行为。类定义了这样一个数据结构的工作方式，但类本身并不是具体的值。为了得到一个可以在程序中使用的具体值，一个类必须被*实例化*（用 `new` 关键字）一次或多次。
 
-Consider:
+考虑：
 
 ```js
 class Page {
@@ -565,19 +564,19 @@ mathNotes.print();
 // ..
 ```
 
-In the `Page` class, the data is a string of text stored in a `this.text` member property. The behavior is `print()`, a method that dumps the text to the console.
+在 `Page` 类中，数据是存储在 `this.text` 成员属性中的一串文本。行为是 `print()`，一个将文本转储到控制台的方法。
 
-For the `Notebook` class, the data is an array of `Page` instances. The behavior is `addPage(..)`, a method that instantiates new `Page` pages and adds them to the list, as well as `print()` (which prints out all the pages in the notebook).
+对于 `Notebook` 类，数据是一个 `Page` 实例的数组。行为是 `addPage(..)`，一个实例化新 `Page` 页并将其添加到列表中的方法，以及 `print()`（打印出笔记本中的所有页面）。
 
-The statement `mathNotes = new Notebook()` creates an instance of the `Notebook` class, and `page = new Page(text)` is where instances of the `Page` class are created.
+语句 `mathNotes = new Notebook()` 创建 `Notebook` 类的实例，`page = new Page(text)` 是创建 `Page` 类实例的地方。
 
-Behavior (methods) can only be called on instances (not the classes themselves), such as `mathNotes.addPage(..)` and `page.print()`.
+行为（方法）只能在实例上调用（而不是类本身），如 `mathNotes.addPage(..)` 和 `page.print()`。
 
-The `class` mechanism allows packaging data (`text` and `pages`) to be organized together with their behaviors (e.g., `addPage(..)` and `print()`). The same program could have been built without any `class` definitions, but it would likely have been much less organized, harder to read and reason about, and more susceptible to bugs and subpar maintenance.
+`class` 机制允许包装数据（`text` 和 `pages`）与它们的行为（如 `addPage(..)` 和 `print()`）组织在一起。同样的程序可以在没有任何 “类” 定义的情况下建立，但其组织性可能会差很多，更难阅读和理解，更容易出现错误和不合格的维护。
 
-#### Class Inheritance
+#### 类继承
 
-Another aspect inherent to traditional "class-oriented" design, though a bit less commonly used in JS, is "inheritance" (and "polymorphism"). Consider:
+传统的 “面向类” 设计所固有的另一个方面是 “继承”（和 “多态”），虽然在 JS 中使用得比较少。考虑：
 
 ```js
 class Publication {
@@ -597,9 +596,9 @@ class Publication {
 }
 ```
 
-This `Publication` class defines a set of common behavior that any publication might need.
+这个 “出版物” 类定义了一组任何出版物可能需要的常见行为。
 
-Now let's consider more specific types of publication, like `Book` and `BlogPost`:
+现在让我们考虑一下更具体的出版物类型，比如 `Book` 和 `BlogPost`：
 
 ```js
 class Book extends Publication {
@@ -635,9 +634,9 @@ class BlogPost extends Publication {
 }
 ```
 
-Both `Book` and `BlogPost` use the `extends` clause to *extend* the general definition of `Publication` to include additional behavior. The `super(..)` call in each constructor delegates to the parent `Publication` class's constructor for its initialization work, and then they do more specific things according to their respective publication type (aka, "sub-class" or "child class").
+`Book` 和 `BlogPost` 都使用 `extends` 子句来*扩展* `Publication` 的一般定义，以包含额外的行为。每个构造函数中的 `super(..)` 调用委托给父类 `Publication` 的构造函数进行初始化工作，然后它们根据各自的出版物类型（也就是 “子类”）做更具体的事情。
 
-Now consider using these child classes:
+现在考虑使用这些子类：
 
 ```js
 var YDKJS = new Book({
@@ -669,27 +668,27 @@ forAgainstLet.print();
 // https://davidwalsh.name/for-and-against-let
 ```
 
-Notice that both child class instances have a `print()` method, which was an override of the *inherited* `print()` method from the parent `Publication` class. Each of those overridden child class `print()` methods call `super.print()` to invoke the inherited version of the `print()` method.
+请注意，两个子类实例都有一个 `print()` 方法，它是对父类 `Publication` 中*继承的* `print()` 方法的覆盖。这些被覆盖的子类 `print()` 方法都会调用 `super.print()` 来调用继承版的 `print()` 方法。
 
-The fact that both the inherited and overridden methods can have the same name and co-exist is called *polymorphism*.
+继承的和覆盖的方法都可以有相同的名称并共存，这一点被称为*多态性*。
 
-Inheritance is a powerful tool for organizing data/behavior in separate logical units (classes), but allowing the child class to cooperate with the parent by accessing/using its behavior and data.
+继承是一个强大的工具，它可以将数据/行为组织在独立的逻辑单元（类）中，但允许子类通过访问/使用其行为和数据与父类合作。
 
-### Modules
+### 模块
 
-The module pattern has essentially the same goal as the class pattern, which is to group data and behavior together into logical units. Also like classes, modules can "include" or "access" the data and behaviors of other modules, for cooperation's sake.
+模块模式与类模式的目标基本相同，即把数据和行为归纳为逻辑单元。同样和类一样，模块可以 “包含” 或 “访问” 其他模块的数据和行为，以达到合作的目的。
 
-But modules have some important differences from classes. Most notably, the syntax is entirely different.
+但模块与类有一些重要的区别。最主要的是，语法完全不同。
 
-#### Classic Modules
+#### 经典模块
 
-ES6 added a module syntax form to native JS syntax, which we'll look at in a moment. But from the early days of JS, modules was an important and common pattern that was leveraged in countless JS programs, even without a dedicated syntax.
+ES6 在原生 JS 语法的基础上增加了模块语法形式，我们稍后再看。但从 JS 的早期开始，模块就是一个重要而常见的模式，即使没有专门的语法，也被无数的 JS 程序所利用。
 
-The key hallmarks of a *classic module* are an outer function (that runs at least once), which returns an "instance" of the module with one or more functions exposed that can operate on the module instance's internal (hidden) data.
+一个*经典的模块*的关键标志是一个外部函数（至少运行一次），它返回一个模块的 “实例”，并暴露出一个或多个函数，可以对模块实例的内部（隐藏）数据进行操作。
 
-Because a module of this form is *just a function*, and calling it produces an "instance" of the module, another description for these functions is "module factories".
+因为这种形式的模块*只是一个函数*，调用它就会产生一个模块的 “实例”，所以这些函数的另一种描述是 “模块工厂”。
 
-Consider the classic module form of the earlier `Publication`, `Book`, and `BlogPost` classes:
+考虑一下之前的的 `Publication`、`Book` 和 `BlogPost` 类的经典模块形式：
 
 ```js
 function Publication(title,author,pubDate) {
@@ -740,15 +739,15 @@ function BlogPost(title,author,pubDate,URL) {
 }
 ```
 
-Comparing these forms to the `class` forms, there are more similarities than differences.
+将这些形式与 `class` 形式进行比较，相似之处多于不同之处。
 
-The `class` form stores methods and data on an object instance, which must be accessed with the `this.` prefix. With modules, the methods and data are accessed as identifier variables in scope, without any `this.` prefix.
+`class` 形式中在一个对象实例上存储方法和数据，必须用 `this.` 前缀来访问。对于模块，方法和数据是作为作用域内的标识符变量来访问的，没有任何 `this.` 前缀。
 
-With `class`, the "API" of an instance is implicit in the class definition—also, all data and methods are public. With the module factory function, you explicitly create and return an object with any publicly exposed methods, and any data or other unreferenced methods remain private inside the factory function.
+`class` 中，实例的 “API” 是隐含在类定义中的 —— 并且所有的数据和方法都是公共的。使用模块工厂函数，你显式地创建并返回一个对象，其中包含任何公开暴露的方法，任何数据或其他未引用的方法在工厂函数中保持私有。
 
-There are other variations to this factory function form that are quite common across JS, even in 2020; you may run across these forms in different JS programs: AMD (Asynchronous Module Definition), UMD (Universal Module Definition), and CommonJS (classic Node.js-style modules). The variations are minor (not quite compatible). However, all of these forms rely on the same basic principles.
+这种工厂函数形式还有其他的变体，在整个 JS 中相当常见，甚至在 2020 年也是如此；你可能会在不同的 JS 程序中碰到这些形式。AMD（异步模块定义）、UMD（通用模块定义）和 CommonJS（经典的 Node.js 风格模块）。这些变化不大（也不太兼容）。然而，所有这些形式都依赖于相同的基本原则。
 
-Consider also the usage (aka, "instantiation") of these module factory functions:
+还要考虑这些模块工厂函数的用法（也就是 “实例化”）：
 
 ```js
 var YDKJS = Book({
@@ -780,23 +779,23 @@ forAgainstLet.print();
 // https://davidwalsh.name/for-and-against-let
 ```
 
-The only observable difference here is the lack of using `new`, calling the module factories as normal functions.
+这里唯一可以观察到的区别是没有使用 `new`，而是像普通函数一样调用模块工厂。
 
-#### ES Modules
+#### ES 模块
 
-ES modules (ESM), introduced to the JS language in ES6, are meant to serve much the same spirit and purpose as the existing *classic modules* just described, especially taking into account important variations and use cases from AMD, UMD, and CommonJS.
+ES 模块（ESM）是在 ES6 中引入 JS 语言的，其目的是与刚才介绍的现有*经典模块*的思想和目的基本相同，特别是考虑到 AMD、UMD 和 CommonJS 的重要变化和用例。
 
-The implementation approach does, however, differ significantly.
+但是，实现方法确实有很大的不同。
 
-First, there's no wrapping function to *define* a module. The wrapping context is a file. ESMs are always file-based; one file, one module.
+首先，没有包装函数来*定义*一个模块。包装上下文是一个文件。ESM 总是基于文件，一个文件，一个模块。
 
-Second, you don't interact with a module's "API" explicitly, but rather use the `export` keyword to add a variable or method to its public API definition. If something is defined in a module but not `export`ed, then it stays hidden (just as with *classic modules*).
+其次，你不会显式地与一个模块的 “API” 交互，而是使用 `export` 关键字将一个变量或方法添加到它的公共 API 定义中。如果某个东西在模块中定义了，但没有被 `export`，那么它就会被隐藏起来（就像*经典模块*一样）。
 
-Third, and maybe most noticeably different from previously discussed patterns, you don't "instantiate" an ES module, you just `import` it to use its single instance. ESMs are, in effect, "singletons," in that there's only one instance ever created, at first `import` in your program, and all other `import`s just receive a reference to that same single instance. If your module needs to support multiple instantiations, you have to provide a *classic module-style* factory function on your ESM definition for that purpose.
+第三，也许是与之前讨论的模式最明显的不同，你不 “实例化” 一个 ES 模块，你只是 `import` 它来使用它的单一实例。ESM 实际上是 “单例”，因为在你的程序中第一次 `import` 时，只创建了一个实例，而所有其他的 `import` 只是接收到一个对同一个实例的引用。如果你的模块需要支持多个实例，你必须在你的 ESM 定义上提供一个*经典的模块风格的*工厂函数来实现这个目的。
 
-In our running example, we do assume multiple-instantiation, so these following snippets will mix both ESM and *classic modules*.
+在我们的运行示例中，我们确实假设了多实例化，所以下面这些片段将混合 ESM 和*经典模块*。
 
-Consider the file `publication.js`:
+考虑文件 `publication.js`：
 
 ```js
 function printDetails(title,author,pubDate) {
@@ -818,7 +817,7 @@ export function create(title,author,pubDate) {
 }
 ```
 
-To import and use this module, from another ES module like `blogpost.js`:
+从另一个ES模块如 `blogpost.js` 导入和使用这个模块：
 
 ```js
 import { create as createPub } from "publication.js";
@@ -841,7 +840,7 @@ export function create(title,author,pubDate,URL) {
 }
 ```
 
-And finally, to use this module, we import into another ES module like `main.js`:
+最后，为了使用这个模块，我们把它导入到另一个 ES 模块中，比如 `main.js`：
 
 ```js
 import { create as newBlogPost } from "blogpost.js";
@@ -860,18 +859,18 @@ forAgainstLet.print();
 // https://davidwalsh.name/for-and-against-let
 ```
 
-| NOTE: |
+| 注意： |
 | :--- |
-| The `as newBlogPost` clause in the `import` statement is optional; if omitted, a top-level function just named `create(..)` would be imported. In this case, I'm renaming it for readability's sake; its more generic factory name of `create(..)` becomes more semantically descriptive of its purpose as `newBlogPost(..)`. |
+| `import` 语句中的 `as newBlogPost` 子句是可选的；如果省略，一个名为 `create(..)` 的顶层函数将被导入。在这种情况下，为了便于阅读，我将它重命名为 `create(..)`；它更通用的工厂名 `create(..)` 变成 `newBlogPost(..)` 在语义上更能说明其目的。|
 
-As shown, ES modules can use *classic modules* internally if they need to support multiple-instantiation. Alternatively, we could have exposed a `class` from our module instead of a `create(..)` factory function, with generally the same outcome. However, since you're already using ESM at that point, I'd recommend sticking with *classic modules* instead of `class`.
+如图所示，ES 模块如果需要支持多实例，可以在内部使用*经典模块*。另外，我们也可以从我们的模块中暴露出一个 `class`，而不是 `create(..)` 工厂函数，结果大致相同。不过，既然你这时已经在使用 ESM 了，我建议你坚持使用*经典模块*而不是 `class`。
 
-If your module only needs a single instance, you can skip the extra layers of complexity: `export` its public methods directly.
+如果你的模块只需要一个实例，你可以跳过额外的复杂层次：直接 `export` 它的公共方法。
 
-## The Rabbit Hole Deepens
+## “兔洞” 越陷越深
 
-As promised at the top of this chapter, we just glanced over a wide surface area of the main parts of the JS language. Your head may still be spinning, but that's entirely natural after such a firehose of information!
+正如本章顶部所承诺的那样，我们刚刚浏览了很多 JS 语言主要部分。你可能感到头晕脑胀，但在经历了这样的大量信息的冲击之后，这完全是正常的!
 
-Even with just this "brief" survey of JS, we covered or hinted at a ton of details you should carefully consider and ensure you are comfortable with. I'm serious when I suggest: re-read this chapter, maybe several times.
+即使只是对 JS 的这次 “简要” 调查，我们也涵盖或暗示了一大堆细节，你应该仔细考虑并确保自己能适应。我认真的建议：重读这一章，也许要读几遍。
 
-In the next chapter, we're going to dig much deeper into some important aspects of how JS works at its core. But before you follow that rabbit hole deeper, make sure you've taken adequate time to fully digest what we've just covered here.
+在下一章，我们将更深入地探讨 JS 核心工作原理的一些重要方面。但在你跟着那个兔子洞深入之前，请确保你已经花了足够的时间来充分消化我们刚刚在这里所讲的内容。

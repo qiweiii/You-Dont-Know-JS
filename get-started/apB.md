@@ -1,13 +1,13 @@
-# You Don't Know JS Yet: Get Started - 2nd Edition
-# Appendix B: Practice, Practice, Practice!
+# 你不知道的 JavaScript：入门 —— 第 2 版
+# 附录 B：练习、练习、练习！
 
-In this appendix, we'll explore some exercises and their suggested solutions. These are just to *get you started* with practice over the concepts from the book.
+在本附录中，我们将探索一些练习及其参考答案。这些只是为了*让你开始*对书中的概念进行练习。
 
-## Practicing Comparisons
+## 练习比较
 
-Let's practice working with value types and comparisons (Chapter 4, Pillar 3) where coercion will need to be involved.
+让我们来练习值类型和涉及强制的比较（第 4 章，支柱 3）。
 
-`scheduleMeeting(..)` should take a start time (in 24-hour format as a string "hh:mm") and a meeting duration (number of minutes). It should return `true` if the meeting falls entirely within the work day (according to the times specified in `dayStart` and `dayEnd`); return `false` if the meeting violates the work day bounds.
+`scheduleMeeting(..)` 应该取一个开始时间（24 小时格式的字符串 “hh:mm”）和一个会议持续时间（分钟数）。如果会议完全在工作日内（根据 `dayStart` 和 `dayEnd` 中指定的时间），应返回 `true`；如果会议违反了工作日的界限，应返回 `false`。
 
 ```js
 const dayStart = "07:30";
@@ -26,13 +26,13 @@ scheduleMeeting("17:30",30);    // false
 scheduleMeeting("18:00",15);    // false
 ```
 
-Try to solve this yourself first. Consider the usage of equality and relational comparison operators, and how coercion impacts this code. Once you have code that works, *compare* your solution(s) to the code in "Suggested Solutions" at the end of this appendix.
+自己先尝试解决这个问题。考虑相等关系比较运算符的使用，以及强制如何影响这段代码。当你有了可行的代码，请将你的答案与本附录末尾的 “参考答案” 中的代码进行*比较*。
 
-## Practicing Closure
+## 练习闭包
 
-Now let's practice with closure (Chapter 4, Pillar 1).
+现在让我们练习一下闭包（第 4 章，支柱 1）。
 
-The `range(..)` function takes a number as its first argument, representing the first number in a desired range of numbers. The second argument is also a number representing the end of the desired range (inclusive). If the second argument is omitted, then another function should be returned that expects that argument.
+`range(..)` 函数的第一个参数是一个数字，代表所需数字范围中的第一个数字。第二个参数也是一个数字，代表所需范围的末尾（包括）。如果省略了第二个参数，则应返回一个接收该参数的函数。
 
 ```js
 function range(start,end) {
@@ -53,19 +53,19 @@ start3(0);     // []
 start4(6);     // [4,5,6]
 ```
 
-Try to solve this yourself first.
+先尝试自己解决这个问题。
 
-Once you have code that works, *compare* your solution(s) to the code in "Suggested Solutions" at the end of this appendix.
+当你有了可行的代码，请将你的答案与本附录末尾的 “参考答案” 中的代码进行*比较*。
 
-## Practicing Prototypes
+## 练习原型
 
-Finally, let's work on `this` and objects linked via prototype (Chapter 4, Pillar 2).
+最后，让我们来研究一下 `this` 和通过原型连接的对象（第 4 章，支柱 2）。
 
-Define a slot machine with three reels that can individually `spin()`, and then `display()` the current contents of all the reels.
+定义一个有三个卷轴的老虎机，可以单独 `spin()`（旋转），然后 `display()` （展示）所有卷轴的当前内容。
 
-The basic behavior of a single reel is defined in the `reel` object below. But the slot machine needs individual reels—objects that delegate to `reel`, and which each have a `position` property.
+单个卷轴的基本行为在下面的 `reel` 对象中定义。但是老虎机需要每个的卷轴对象委托给 `reel`，并且每个卷轴都有一个 `position` 属性。
 
-A reel only *knows how* to `display()` its current slot symbol, but a slot machine typically shows three symbols per reel: the current slot (`position`), one slot above (`position - 1`), and one slot below (`position + 1`). So displaying the slot machine should end up displaying a 3 x 3 grid of slot symbols.
+一个卷轴只*知道如何* `display()` 其当前的老虎机符号，但老虎机通常每个卷轴显示三个符号：当前的（`position`），上一个（`position - 1`）和下一个（`position + 1`）。所以显示老虎机最终应该显示一个 3 × 3 网格的老虎机符号。
 
 ```js
 function randMax(max) {
@@ -98,8 +98,8 @@ var reel = {
 
 var slotMachine = {
     reels: [
-        // this slot machine needs 3 separate reels
-        // hint: Object.create(..)
+        // 这台老虎机需要 3 个独立的卷轴
+        // 提示：Object.create(..)
     ],
     spin() {
         this.reels.forEach(function spinReel(reel){
@@ -124,23 +124,23 @@ slotMachine.display();
 // ☺ | ♦ | ★
 ```
 
-Try to solve this yourself first.
+自己先尝试解决。
 
-Hints:
+提示：
 
-* Use the `%` modulo operator for wrapping `position` as you access symbols circularly around a reel.
+* 使用 `%` 取模运算符来限制 `position`，因为你在卷轴上循环访问符号。
 
-* Use `Object.create(..)` to create an object and prototype-link it to another object. Once linked, delegation allows the objects to share `this` context during method invocation.
+* 使用 `Object.create(..)` 来创建一个对象，并将其原型连接到另一个对象。一旦连接，委托允许对象在方法调用期间共享 `this` 上下文。
 
-* Instead of modifying the reel object directly to show each of the three positions, you can use another temporary object (`Object.create(..)` again) with its own `position`, to delegate from.
+* 与其直接修改卷轴对象来显示三个位置中的每一个位置，不如使用另一个临时对象（再次 `Object.create(..)`），用它自己的 `position`，来进行委托。
 
-Once you have code that works, *compare* your solution(s) to the code in "Suggested Solutions" at the end of this appendix.
+当你有了可行的代码，请将你的答案与本附录末尾的 “参考答案” 中的代码进行*比较*。
 
-## Suggested Solutions
+## 参考答案
 
-Keep in mind that these suggested solutions are just that: suggestions. There's many different ways to solve these practice exercises. Compare your approach to what you see here, and consider the pros and cons of each.
+请记住，这些参考答案只算是：参考。有许多不同的方法来解决这些练习题。将你的方法与你在这里看到的进行比较，并考虑每种方法的利弊。
 
-Suggested solution for "Comparisons" (Pillar 3) practice:
+“比较”（支柱 3）练习的参考答案：
 
 ```js
 const dayStart = "07:30";
@@ -172,8 +172,8 @@ function scheduleMeeting(startTime,durationMinutes) {
                 meetingEndMinutes - 60;
         }
 
-        // re-compose fully-qualified time strings
-        // (to make comparison easier)
+        // 重组成完全合格的时间字符串
+        //（以便于比较）
         let meetingStart = `${
             meetingStartHour.padStart(2,"0")
         }:${
@@ -185,10 +185,10 @@ function scheduleMeeting(startTime,durationMinutes) {
             String(meetingEndMinutes).padStart(2,"0")
         }`;
 
-        // NOTE: since expressions are all strings,
-        // comparisons here are alphabetic, but it's
-        // safe here since they're fully qualified
-        // time strings (ie, "07:15" < "07:30")
+        // 注意：由于表达式都是字符串，
+        // 这里的比较是按字母顺序的，
+        // 但这是安全的，因为它们是完全合格的
+        // 时间字符串（即 "07:15" < "07:30"）
         return (
             meetingStart >= dayStart &&
             meetingEnd <= dayEnd
@@ -209,7 +209,7 @@ scheduleMeeting("18:00",15);    // false
 
 ----
 
-Suggested solution for "Closure" (Pillar 1) practice:
+“闭包”（支柱 1）练习的参考答案：
 
 ```js
 function range(start,end) {
@@ -253,7 +253,7 @@ start4(6);     // [4,5,6]
 
 ----
 
-Suggested solution for "Prototypes" (Pillar 2) practice:
+“原型”（支柱 2）练习的参考答案：
 
 ```js
 function randMax(max) {
@@ -298,7 +298,7 @@ var slotMachine = {
     display() {
         var lines = [];
 
-        // display all 3 lines on the slot machine
+        // 将 3 行全部在老虎机上显示
         for (
             let linePos = -1; linePos <= 1; linePos++
         ) {
@@ -333,4 +333,4 @@ slotMachine.display();
 // ☺ | ♦ | ★
 ```
 
-That's it for this book. But now it's time to look for real projects to practice these ideas on. Just keep coding, because that's the best way to learn!
+这本书就到此为止。但现在是时候寻找真正的项目来实践这些想法了。请继续编码，因为这是最好的学习方法！

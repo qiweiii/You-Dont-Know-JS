@@ -1,128 +1,128 @@
-# You Don't Know JS Yet: Get Started - 2nd Edition
-# Chapter 4: The Bigger Picture
+# 你不知道的 JavaScript：入门 —— 第 2 版
+# 第 4 章：大局观
 
-This book surveys what you need to be aware of as you *get started* with JS. The goal is to fill in gaps that readers newer to JS might have tripped over in their early encounters with the language. I also hope that we've hinted at enough deeper detail throughout to pique your curiosity to want to dig more into the language.
+本书调查了你在*开始*学习 JS 时需要注意的事项。目的是为了填补新接触 JS 的读者在早期接触这门语言时可能会被绊倒的坑。我也希望我们在整个过程中提示了足够多的更深层的细节，以激发你的好奇心，让你想更深入地了解这门语言。
 
-The rest of the books in this series are where we will unpack all of the rest of the language, in far greater detail than we could have done in a few brief chapters here.
+我们将在本系列的其他书籍中解读语言的其他部分，比我们在这里的几个简短章节中所能做的要更详细。
 
-Remember to take your time, though. Rather than rushing onto the next book in an attempt to churn through all the books expediently, spend some time going back over the material in this book. Spend some more time looking through code in your current projects, and comparing what you see to what's been discussed so far.
+不过，记得要慢慢来。与其急着去看下一本书，试图快速地看完所有的书，不如花点时间回味一下本书中的内容。多花一些时间查看你当前项目中的代码，并将你所看到的与迄今为止所讨论的内容进行比较。
 
-When you're ready, this final chapter divides the organization of the JS language into three main pillars, then offers a brief roadmap of what to expect from the rest of the book series, and how I suggest you proceed. Also, don't skip the appendices, especially Appendix B, "Practice, Practice, Practice!".
+当你准备好了，这最后一章将 JS 语言的组织划分为三大支柱，然后提供一个简短的路线图，说明从本系列其余部分中你可以期待的内容，以及我对如何继续学习的建议。另外，不要跳过附录，尤其是附录 B，“练习、练习、练习！”。
 
-## Pillar 1: Scope and Closure
+## 支柱 1：作用域和闭包
 
-The organization of variables into units of scope (functions, blocks) is one of the most foundational characteristics of any language; perhaps no other characteristic has a greater impact on how programs behave.
+将变量组织成作用域单元（函数、块）是任何语言最基础的特性之一；也许没有其他特性对程序的行为方式有更大的影响。
 
-Scopes are like buckets, and variables are like marbles you put into those buckets. The scope model of a language is like the rules that help you determine which color marbles go in which matching-color buckets.
+作用域就像桶，而变量就像你放进这些桶里的弹珠。语言的作用域模型就像帮助你确定哪些颜色的弹珠应该放在哪些匹配颜色的桶里的规则。
 
-Scopes nest inside each other, and for any given expression or statement, only variables at that level of scope nesting, or in higher/outer scopes, are accessible; variables from lower/inner scopes are hidden and inaccessible.
+作用域互相嵌套，对于任何给定的表达式或语句，只能访问在该级别的作用域嵌套中的，或在较高/较外的作用域中的变量；较低/较内的作用域中的变量是隐藏的，不可访问的。
 
-This is how scopes behave in most languages, which is called lexical scope. The scope unit boundaries, and how variables are organized in them, is determined at the time the program is parsed (compiled). In other words, it's an author-time decision: where you locate a function/scope in the program determines what the scope structure of that part of the program will be.
+这就是大多数语言中的作用域的表现，也就是所谓的词法作用域。作用域单元的边界，以及变量在其中的组织方式，是在程序被分析（编译）时确定的。换句话说，这是由作者的决定：你的程序中的函数/作用域的位置决定了程序中这部分作用域的结构是什么。
 
-JS is lexically scoped, though many claim it isn't, because of two particular characteristics of its model that are not present in other lexically scoped languages.
+JS 使用的是词法作用域，尽管很多人声称它不是，因为它的模型有两个特殊的特性，而这两个特性在其他词法作用域语言中是不存在的。
 
-The first is commonly called *hoisting*: when all variables declared anywhere in a scope are treated as if they're declared at the beginning of the scope. The other is that `var`-declared variables are function scoped, even if they appear inside a block.
+第一种情况通常被称为*提升*：在作用域中任何地方声明的变量都被视为在作用域的开始处声明的。另一种是，`var` 声明的变量是函数作用域内的，即使它们出现在一个块中。
 
-Neither hoisting nor function-scoped `var` are sufficient to back the claim that JS is not lexically scoped. `let`/`const` declarations have a peculiar error behavior called the "Temporal Dead Zone" (TDZ) which results in observable but unusable variables. Though TDZ can be strange to encounter, it's *also* not an invalidation of lexical scoping. All of these are just unique parts of the language that should be learned and understood by all JS developers.
+无论是提升还是函数作用域的 `var` 都不足以支持 JS 不是词法作用域的说法。`let`/`const` 声明有一种奇特的错误行为，称为 “临时死亡区”（TDZ），它导致了可观察但不可用的变量。虽然遇到 TDZ 是奇怪的，但它*也*不能证明不是词法作用域。所有这些都只是语言中独特的部分，所有 JS 开发人员都应该学习和理解。
 
-Closure is a natural result of lexical scope when the language has functions as first-class values, as JS does. When a function makes reference to variables from an outer scope, and that function is passed around as a value and executed in other scopes, it maintains access to its original scope variables; this is closure.
+当语言将函数作为第一类值时，闭包是词法作用域的自然结果，JS 就是这样。当一个函数对一个外部作用域的变量进行引用时，该函数作为一个值被传来传去，并在其他作用域中执行，它会保持对其原始作用域变量的访问，这就是闭包。
 
-Across all of programming, but especially in JS, closure drives many of the most important programming patterns, including modules. As I see it, modules are as *with the grain* as you can get, when it comes to code organization in JS.
+在所有的编程中，特别是在 JS 中，闭包驱动了许多最重要的编程模式，包括模块。在我看来，模块在 JS 代码组织方面，是最*符合规律*的。
 
-To dig further into scope, closures, and how modules work, read Book 2, *Scope & Closures*.
+要进一步挖掘作用域、闭包以及模块如何工作，请阅读第二本书 *《作用域和闭包》*。
 
-## Pillar 2: Prototypes
+## 支柱 2：原型
 
-The second pillar of the language is the prototypes system. We covered this topic in-depth in Chapter 3 ("Prototypes"), but I just want to make a few more comments about its importance.
+该语言的第二个支柱是原型系统。我们在第 3 章（“原型”）中深入地介绍了这个话题，但我只想对它的重要性多说几句。
 
-JS is one of very few languages where you have the option to create objects directly and explicitly, without first defining their structure in a class.
+JS 是为数不多的可以选择直接显式地创建对象的语言之一，而不需要先在类中定义它们的结构。
 
-For many years, people implemented the class design pattern on top of prototypes—so-called "prototypal inheritance" (see Appendix A, "Prototypal 'Classes'")—and then with the advent of ES6's `class` keyword, the language doubled-down on its inclination toward OO/class-style programming.
+多年来，人们在原型之上实现了类的设计模式 —— 所谓的 “原型继承”（见附录 A，“原型类”）—— 然后随着 ES6 的 `class` 关键字的出现，这门语言加倍地倾向于 OO/类式编程。
 
-But I think that focus has obscured the beauty and power of the prototype system: the ability for two objects to simply connect with each other and cooperate dynamically (during function/method execution) through sharing a `this` context.
+但我认为这种关注掩盖了原型系统的美感和力量：两个对象通过共享一个 `this` 上下文来简单地相互连接并动态合作（在函数/方法执行过程中）的能力。
 
-Classes are just one pattern you can build on top of such power. But another approach, in a very different direction, is to simply embrace objects as objects, forget classes altogether, and let objects cooperate through the prototype chain. This is called *behavior delegation*. I think delegation is more powerful than class inheritance, as a means for organizing behavior and data in our programs.
+类只是你可以在这种能力之上建立的一种模式。但另一种方向截然不同的方法是，简单地把对象作为对象，完全忘记类，让对象通过原型链进行合作。这就是所谓的*行为委托*。我认为委托比类继承更强大，是我们程序中组织行为和数据的一种手段。
 
-But class inheritance gets almost all the attention. And the rest goes to functional programming (FP), as the sort of "anti-class" way of designing programs. This saddens me, because it snuffs out any chance for exploration of delegation as a viable alternative.
+但类继承几乎得到了所有的关注。其余的则是函数式编程（FP），作为一种 “非类” 的程序设计方式。这让我很难过，因为它扼杀了探索委托作为一种可行的选择的机会。
 
-I encourage you to spend plenty of time deep in Book 3, *Objects & Classes*, to see how object delegation holds far more potential than we've perhaps realized. This isn't an anti-`class` message, but it is intentionally a "classes aren't the only way to use objects" message that I want more JS developers to consider.
+我鼓励你花大量的时间深入阅读第三册 *《对象和类》*，看看对象委托是如何拥有比我们可能意识到的更大的潜力。这并不是一个反 “类” 的信息，而是特意的说 “类不是使用对象的唯一方式”，我希望更多的 JS 开发者考虑这个问题。
 
-Object delegation is, I would argue, far more *with the grain* of JS, than classes (more on *grains* in a bit).
+我认为，对象委托比类更符合 JS 的*规律*（稍后再谈*规律*）。
 
-## Pillar 3: Types and Coercion
+## 支柱 3：类型与强制
 
-The third pillar of JS is by far the most overlooked part of JS's nature.
+JS 的第三个支柱是迄今为止 JS 本质中被忽视最多的部分。
 
-The vast majority of developers have strong misconceptions about how *types* work in programming languages, and especially how they work in JS. A tidal wave of interest in the broader JS community has begun to shift to "static typing" approaches, using type-aware tooling like TypeScript or Flow.
+绝大多数开发人员对*类型*在编程语言中如何工作，特别是在 JS 中如何工作有很大的误解。广大 JS 社区的兴趣潮已经开始转向 “静态类型”，使用 TypeScript 或 Flow 等类型感知工具。
 
-I agree that JS developers should learn more about types, and should learn more about how JS manages type conversions. I also agree that type-aware tooling can help developers, assuming they have gained and used this knowledge in the first place!
+我同意 JS 开发者应该学习更多关于类型的知识，应该学习更多关于 JS 如何管理类型转换的知识。我也同意类型感知工具可以帮助开发者，前提是他们首先获得并使用了这些知识！
 
-But I don't agree at all that the inevitable conclusion of this is to decide JS's type mechanism is bad and that we need to cover up JS's types with solutions outside the language. We don't have to follow the "static typing" way to be smart and solid with types in our programs. There are other options, if you're just willing to go *against the grain* of the crowd, and *with the grain* of JS (again, more on that to come).
+但我完全不同意由此认定 JS 的类型机制不好，并且我们需要用语言之外的解决方案来掩盖 JS 的类型这样的结论。我们不一定非要按照 “静态类型” 的方式，在程序中巧妙而扎实地处理类型。如果你愿意与众人*背道而驰*，而顺从 JS 的*规律*的话，还有其他的选择（以后会有更多的介绍）。
 
-Arguably, this pillar is more important than the other two, in the sense that no JS program will do anything useful if it doesn't properly leverage JS's value types, as well as the conversion (coercion) of values between types.
+可以说，这个支柱比其他两个支柱更重要，因为如果 JS 程序不能正确地利用 JS 的值类型，以及类型之间的值转换（强制），那么任何 JS 程序都不会做任何有用的事情。
 
-Even if you love TypeScript/Flow, you are not going to get the most out of those tools or coding approaches if you aren't deeply familiar with how the language itself manages value types.
+即使你喜欢 TypeScript/Flow，如果你不深入了解语言本身是如何管理值类型的，你也不会从这些工具或编码方法中得到最大的好处。
 
-To learn more about JS types and coercion, check out Book 4, *Types & Grammar*. But please don't skip over this topic just because you've always heard that we should use `===` and forget about the rest.
+要想了解更多关于 JS 类型和强制的知识，请查阅第 4 册 *《类型和语法》*。但请不要因为你总是听说我们应该使用 `===` 而跳过这个话题，而忘记其他的内容。
 
-Without learning this pillar, your foundation in JS is shaky and incomplete at best.
+如果不学习这个支柱，你的 JS 基础是不牢固的，至少也是不完整的。
 
-## With the Grain
+## 符合规律
 
-I have some advice to share on continuing your learning journey with JS, and your path through the rest of this book series: be aware of the *grain* (recall various references to *grain* earlier in this chapter).
+我有一些关于继续 JS 学习之旅，以及你在阅读本系列丛书其余部分的建议要与大家分享：要意识到*规律*（回忆本章前面对*规律*的各种提及）。
 
-First, consider the *grain* (as in, wood) of how most people approach and use JS. You've probably already noticed that these books cut against that *grain* in many respects. In YDKJSY, I respect you the reader enough to explain all the parts of JS, not only some select popular parts. I believe you're both capable and deserving of that knowledge.
+首先，考虑一下大多数人接近和使用 JS 的*规律*（如木头中的纹路）。你可能已经注意到，一些书在很多方面都与这种*纹路*相违背。在 YDKJSY 中，我足够尊重你这位读者，并解释了 JS 的所有部分，而不仅仅是一些精选的流行部分。我相信你们都有能力也值得拥有这些知识。
 
-But that is not what you'll find from a lot of other material out there. It also means that the more you follow and adhere to the guidance from these books—that you think carefully and analyze for yourself what's best in your code—the more you will stand out. That can be a good and bad thing. If you ever want to break out from the crowd, you're going to have to break from how the crowd does it!
+但这是你从很多其他资料中找不到的。这也意味着，你越是遵循和坚持这些书中的指导 —— 你自己仔细思考和分析你的代码中最好的是什么 —— 你就越会脱颖而出。这可能是一件好事，也可能是一件坏事。如果你想从人群中脱颖而出，你就必须从人群的做法中突破出来！
 
-But I've also had many people tell me that they quoted some topic/explanation from these books during a job interview, and the interviewer told the candidate they were wrong; indeed, people have reportedly lost out on job offers as a result.
+但我也有很多人告诉我，他们在求职面试时引用了这些书中的一些话题/解释，而面试官告诉应聘者他们错了；据说确实有人因此失去了工作机会。
 
-As much as possible, I endeavor in these books to provide completely accurate information about JS, informed generally from the specification itself. But I also dose out quite a bit of my opinions on how you can interpret and use JS to the best benefit in your programs. I don't present opinion as fact, or vice versa. You'll always know which is which in these books.
+在这些书中，我尽可能地提供关于 JS 的完全准确的信息，并从规范本身中获得信息。但是，我也会就如何在你的程序中解释和使用 JS 以获得最大的好处发表一些我的意见。我不会把观点当作事实，反之亦然。在这些书中，你总能知道哪个是事实。
 
-Facts about JS are not really up for debate. Either the specification says something, or it doesn't. If you don't like what the specification says, or my relaying of it, take that up with TC39! If you're in an interview and they claim you're wrong on the facts, ask them right then and there if you can look it up in the specification. If the interviewer won't re-consider, then you shouldn't want to work there anyway.
+关于 JS 的事实其实并不值得争论。要么规范说了什么，要么没有。如果你不喜欢规范说的东西，或者不喜欢我转述的东西，可以去找 TC39！如果你在面试中，他们声称你的说法是错误的，就在那时问他们，你是否可以在规范中查找它。如果面试官不肯重新考虑，那你无论如何也不要想在那里工作。
 
-But if you choose to align with my opinions, you have to be prepared to back up those choices with *why* you feel that way. Don't just parrot what I say. Own your opinions. Defend them. And if someone you were hoping to work with disagrees, walk away with your head still held high. It's a big JS, and there's plenty of room for lots of different ways.
+但如果你的选择与我的意见一致，你必须准备好用*为什么*你有这种感觉来支持这些选择。不要只是鹦鹉学舌。要拥有你的观点。为他们辩护。如果你希望与之合作的人不同意，请昂首挺胸地离开。JS 很大，有很多空间，可以有很多不同的方式。
 
-In other words, don't be afraid to go against the *grain*, as I have done with these books and all my teachings. Nobody can tell you how you will best make use of JS; that's for you to decide. I'm merely trying to empower you in coming to your own conclusions, no matter what they are.
+换句话说，不要害怕违背*规律*，就像我对这些书和我所有的教导一样。没有人可以告诉你如何才能最好地利用 JS，那是你自己的决定。我只是想让你有能力得出自己的结论，无论结论是什么。
 
-On the other hand, there's a *grain* you really should pay attention to and follow: the *grain* of how JS works, at the language level. There are things that work well and naturally in JS, given the right practice and approach, and there are things you really shouldn't try to do in the language.
+另一方面，有一个你真的应该关注和遵循*规律*：在语言层面的，JS 如何工作的*规律*。在 JS 中，有些事情只要有正确的实践和方法，就能很好地、很自然地工作，而有些事情你真的不应该在语言中尝试去做。
 
-Can you make your JS program look like a Java, C#, or Perl program? What about Python or Ruby, or even PHP? To varying degrees, sure you can. But should you?
+你能让你的 JS 程序看起来像一个 Java、C# 或 Perl 程序吗？那 Python 或 Ruby，甚至 PHP 呢？在不同程度上，你当然可以。但是你应该吗？
 
-No, I don't think you should. I think you should learn and embrace the JS way, and make your JS programs as JS'y as is practical. Some will think that means sloppy and informal programming, but I don't mean that at all. I just mean that JS has a lot of patterns and idioms that are recognizably "JS," and going with that *grain* is the general path to best success.
+不，我不认为你应该。我认为你应该学习和接受 JS 的方式，让你的 JS 程序尽可能的实用。有些人会认为这意味着草率和不正规的编程，但我完全不是这个意思。我的意思只是说，JS 有很多模式和习惯是可以识别的 “JS”，顺着这种*规律*走，是通往最佳成功的通用路径。
 
-Finally, maybe the most important *grain* to recognize is how the existing program(s) you're working on, and developers you're working with, do stuff. Don't read these books and then try to change *all that grain* in your existing projects over night. That approach will always fail.
+最后，也许最重要的*规律*是要认识到你正在开发的程序，以及和你一起工作的开发人员是如何做事的。不要读了这些书，然后试图在一夜之间改变你现有项目中的*规律*。这种方法总是会失败的。
 
-You'll have to shift these things little by little, over time. Work on building consensus with your fellow developers on why it's important to re-visit and re-consider an approach. But do so with just one small topic at a time, and let before-and-after code comparisons do most of the talking. Bring everyone on the team together to discuss, and push for decisions that are based on analysis and evidence from the code rather than the inertia of "our senior devs have always done it this way."
+你必须随着时间的推移，一点一点地转变这些东西。努力和你的开发伙伴们建立共识，为什么要重新审视和重新考虑一种方法。但每次只用一个小话题来做，让前后代码对比来证明一切。把团队中的每个人都召集起来讨论，并推动基于代码中的分析和证据而做出的决策，而不是 “我们的高级开发人员总是这样做” 的惯性。
 
-That's the most important advice I can impart to help you learn JS. Always keep looking for better ways to use what JS gives us to author more readable code. Everyone who works on your code, including your future self, will thank you!
+这是我能传授的帮助你学习 JS 的最重要的建议。总是不断寻找更好的方法使用 JS 给我们提供的东西来编写更可读的代码。每个在你的代码上工作的人，包括未来的自己，都会感谢你!
 
-## In Order
+## 顺序
 
-So now you've got a broader perspective on what's left to explore in JS, and the right attitude to approach the rest of your journey.
+所以，现在你已经有了更广阔的视野，知道了JS中还有什么需要探索的地方，也有了对待接下来旅程的正确态度。
 
-But one of the most common practical questions I get at this point is, "What order should I read the books?" There is a straightforward answer... but it also depends.
+但在这一点上，我得到的最常见的实际问题之一是，“我应该以什么顺序阅读这些书？” 有一个直接的答案......但也要看情况。
 
-My suggestion for most readers is to proceed through this series in this order:
+我对大多数读者的建议是按照这个顺序阅读这个系列：
 
-1. Get started with a solid foundation of JS from *Get Started* (Book 1) -- good news, you've already almost finished this book!
+1. 从 *《入门》*（第一册）开始，打好 JS 的基础 —— 好消息，你已经快读完这本书了！
 
-2. In *Scope & Closures* (Book 2), dig into the first pillar of JS: lexical scope, how that supports closure, and how the module pattern organizes code.
+2. 在 *《作用域和闭包》*（第 2 册）中，挖掘 JS 的第一支柱：词法作用域，和它如何支持闭包，以及模块模式如何组织代码。
 
-3. In *Objects & Classes* (Book 3), focus on the second pillar of JS: how JS's `this` works, how object prototypes support delegation, and how prototypes enable the `class` mechanism for OO-style code organization.
+3. 在 *《对象和类》*（第 3 册）中，关注 JS 的第二支柱：JS 的 `this` 是如何工作的，对象原型是如何支持委托的，原型如何实现 OO 式代码组织中的 `class` 机制。
 
-4. In *Types & Grammar* (Book 4), tackle the third and final pillar of JS: types and type coercion, as well as how JS's syntax and grammar define how we write our code.
+4. 在 *《类型和语法》*（第 4 册）中，解决 JS 的第三个也是最后一个支柱：类型和类型强制，以及 JS 的语法和它如何定义我们如何编写代码。
 
-5. With the **three pillars** solidly in place, *Sync & Async* (Book 5) then explores how we use flow control to model state change in our programs, both synchronously (right away) and asynchronously (over time).
+5. 在**三大支柱**稳固之后，*《同步和异步》*（第 5 册）接着探讨我们如何使用流控制来模拟程序中的状态变化，包括同步（马上）和异步（一段时间）。
 
-6. The series concludes with *ES.Next & Beyond* (Book 6), a forward look at the near- and mid-term future of JS, including a variety of features likely coming to your JS programs before too long.
+6. 本系列以 *《ES.Next 和未来》*（第 6 册）作为结尾，前瞻性地展望了 JS 的近中期未来，包括各种可能在不久之后出现在你的 JS 程序中的功能。
 
-That's the intended order to read this book series.
+这就是阅读本系列丛书的预定顺序。
 
-However, Books 2, 3, and 4 can generally be read in any order, depending on which topic you feel most curious about and comfortable exploring first. But I don't recommend you skip any of these three books—not even *Types & Grammar*, as some of you will be tempted to do!—even if you think you already have that topic down.
+然而，第 2、3、4 册一般可以按照任何顺序阅读，这取决于你对哪一个主题感到最好奇，并愿意先探索。但我不建议你跳过这三本书中的任何一本书 —— 甚至包括 *《类型和语法》*，因为你们中的一些人想要这样做！—— 即使你认为你已经掌握了这个主题。
 
-Book 5 (*Sync & Async*) is crucial for deeply understanding JS, but if you start digging in and find it's too intimidating, this book can be deferred until you're more experienced with the language. The more JS you've written (and struggled with!), the more you'll come to appreciate this book. So don't be afraid to come back to it at a later time.
+第 5 册（*《同步和异步》*）对于深入理解 JS 是至关重要的，但如果你开始钻研，发现它太吓人，这本书可以推迟到你对这门语言更有经验的时候再看。你写的 JS 越多（挣扎越多！），你就越会欣赏这本书。所以不要害怕在以后的时间再来读它。
 
-The final book in the series, *ES.Next & Beyond*, in some respects stands alone. It can be read at the end, as I suggest, or right after *Getting Started* if you're looking for a shortcut to broaden your radar of what JS is all about. This book will also be more likely to receive updates in the future, so you'll probably want to re-visit it occasionally.
+系列的最后一本书，*《ES.Next 和未来》*，在某些方面是独立的。它可以像我建议的那样在最后读，如果你想找一条捷径来拓宽你的 JS 知识广度，也可以在 *《入门》* 之后直接读。这本书在未来也更有可能得到更新，所以你可能会想偶尔重新访问它。
 
-However you choose to proceed with YDKJSY, check out the appendices of this book first, especially practicing the snippets in Appendix B, "Practice, Practice, Practice!" Did I mention you should go practice!? There's no better way to learn code than to write it.
+无论你选择如何继续学习 YDKJSY，请先看看本书的附录，尤其是练习附录 B 中的代码片段，“练习、练习、练习！”。我有没有提到你应该去练习！？没有比写代码更好的学习方法了。
